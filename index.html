@@ -6,336 +6,160 @@
 <title>JayCampbell.com — Article Request</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f5f5f3;
-    color: #1a1a1a;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 3rem 1rem;
+    background: #f5f5f3; color: #1a1a1a; min-height: 100vh;
+    display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1rem;
   }
-
   .container { width: 100%; max-width: 560px; }
-
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 2rem;
-  }
-
-  .logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: #1D9E75;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #E1F5EE;
-    flex-shrink: 0;
-    letter-spacing: 0.02em;
-  }
-
-  .header-text .site-name { font-size: 16px; font-weight: 600; color: #1a1a1a; }
-  .header-text .site-sub { font-size: 13px; color: #666; margin-top: 1px; }
-
-  .card {
-    background: #fff;
-    border: 1px solid #e5e5e3;
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
+  .header { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
+  .logo { width: 40px; height: 40px; border-radius: 10px; background: #1D9E75; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #E1F5EE; flex-shrink: 0; }
+  .site-name { font-size: 16px; font-weight: 600; color: #1a1a1a; }
+  .site-sub { font-size: 13px; color: #666; margin-top: 1px; }
+  .card { background: #fff; border: 1px solid #e5e5e3; border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
   .field { margin-bottom: 1.125rem; }
   .field:last-of-type { margin-bottom: 1.25rem; }
-
-  label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: #555;
-    letter-spacing: 0.04em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-
-  label .opt {
-    font-weight: 400;
-    color: #999;
-    text-transform: none;
-    letter-spacing: 0;
-    margin-left: 4px;
-    font-size: 11px;
-  }
-
-  input[type="text"], textarea {
-    width: 100%;
-    background: #f8f8f6;
-    border: 1px solid #e0e0de;
-    border-radius: 8px;
-    padding: 10px 13px;
-    font-size: 14px;
-    color: #1a1a1a;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s, background 0.15s;
-    line-height: 1.5;
-  }
-
-  input[type="text"]:focus, textarea:focus {
-    border-color: #1D9E75;
-    background: #fff;
-  }
-
+  label { display: block; font-size: 12px; font-weight: 600; color: #555; letter-spacing: 0.04em; margin-bottom: 5px; text-transform: uppercase; }
+  label .opt { font-weight: 400; color: #999; text-transform: none; letter-spacing: 0; margin-left: 4px; font-size: 11px; }
+  input[type="text"], textarea { width: 100%; background: #f8f8f6; border: 1px solid #e0e0de; border-radius: 8px; padding: 10px 13px; font-size: 14px; color: #1a1a1a; font-family: inherit; outline: none; transition: border-color 0.15s, background 0.15s; line-height: 1.5; }
+  input[type="text"]:focus, textarea:focus { border-color: #1D9E75; background: #fff; }
   textarea { resize: vertical; min-height: 88px; }
-
-  .hint {
-    font-size: 11px;
-    color: #888;
-    margin-top: 5px;
-    line-height: 1.5;
-  }
-
-  .submit-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    background: #1D9E75;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    letter-spacing: 0.01em;
-  }
-
+  .hint { font-size: 11px; color: #888; margin-top: 5px; line-height: 1.5; }
+  .submit-btn { width: 100%; padding: 12px; font-size: 14px; font-weight: 600; background: #1D9E75; border: none; border-radius: 10px; color: #fff; cursor: pointer; transition: background 0.15s, transform 0.1s; }
   .submit-btn:hover:not(:disabled) { background: #0F6E56; }
   .submit-btn:active:not(:disabled) { transform: scale(0.99); }
   .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  .status {
-    display: none;
-    margin-top: 1rem;
-    padding: 0.875rem 1rem;
-    border-radius: 10px;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
+  .status { display: none; margin-top: 1rem; padding: 0.875rem 1rem; border-radius: 10px; font-size: 13px; line-height: 1.6; }
   .status.show { display: block; }
   .status.pending { background: #FAEEDA; color: #633806; border: 1px solid #EF9F27; }
   .status.success { background: #E1F5EE; color: #085041; border: 1px solid #5DCAA5; }
   .status.error   { background: #FCEBEB; color: #791F1F; border: 1px solid #F09595; }
-
-  .status-title {
-    font-weight: 600;
-    margin-bottom: 3px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .spinner {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    border: 2px solid #EF9F27;
-    border-top-color: #633806;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    flex-shrink: 0;
-  }
-
+  .status-title { font-weight: 600; margin-bottom: 3px; display: flex; align-items: center; gap: 7px; }
+  .spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid #EF9F27; border-top-color: #633806; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .footer-note {
-    font-size: 11px;
-    color: #999;
-    text-align: center;
-    margin-top: 0.875rem;
-  }
-
+  .footer-note { font-size: 11px; color: #999; text-align: center; margin-top: 0.875rem; }
   .recent-section { margin-top: 1.5rem; }
-  .recent-heading {
-    font-size: 11px;
-    font-weight: 600;
-    color: #888;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .recent-item {
-    background: #fff;
-    border: 1px solid #e5e5e3;
-    border-radius: 10px;
-    padding: 0.625rem 0.875rem;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .recent-topic {
-    flex: 1;
-    font-size: 13px;
-    color: #1a1a1a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
+  .recent-heading { font-size: 11px; font-weight: 600; color: #888; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .recent-item { background: #fff; border: 1px solid #e5e5e3; border-radius: 10px; padding: 0.625rem 0.875rem; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+  .recent-topic { flex: 1; font-size: 13px; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .recent-time { font-size: 11px; color: #999; flex-shrink: 0; }
-
-  .pill {
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 600;
-    flex-shrink: 0;
-    background: #FAEEDA;
-    color: #633806;
-  }
+  .pill { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; flex-shrink: 0; background: #FAEEDA; color: #633806; }
 </style>
 </head>
 <body>
 <div class="container">
-
   <div class="header">
     <div class="logo">JC</div>
-    <div class="header-text">
+    <div>
       <div class="site-name">JayCampbell.com</div>
       <div class="site-sub">Article request</div>
     </div>
   </div>
-
   <div class="card">
     <div class="field">
       <label for="topic">Topic <span class="opt">required</span></label>
       <input type="text" id="topic" placeholder="e.g. Testosterone replacement therapy and cardiovascular risk" />
       <div class="hint">Be specific — this becomes the article's core subject and drives the research brief.</div>
     </div>
-
     <div class="field">
       <label for="keywords">Keywords <span class="opt">required</span></label>
       <input type="text" id="keywords" placeholder="e.g. TRT, testosterone therapy, heart health, men over 40" />
       <div class="hint">Comma-separated. Primary keyword first, then supporting terms.</div>
     </div>
-
     <div class="field">
       <label for="notes">Notes <span class="opt">optional</span></label>
       <textarea id="notes" placeholder="Specific angles, studies to include, things to avoid, audience notes…"></textarea>
     </div>
-
     <button class="submit-btn" id="submitBtn" onclick="submitRequest()">Submit article request</button>
-
     <div class="status" id="statusBox">
       <div class="status-title" id="statusTitle"></div>
       <div id="statusMsg"></div>
     </div>
-
     <div class="footer-note">Submits to JayC Topics → triggers Make automation</div>
   </div>
-
   <div class="recent-section" id="recentSection" style="display:none">
     <div class="recent-heading">Recent submissions</div>
     <div id="recentList"></div>
   </div>
-
 </div>
-
 <script>
-const SHEET_ID = '1cfFv37dp9CTKwELGozA9YtSv3DxFIcLK83ZA_104Qo0';
-const TAB      = 'JayC Topics';
-const API_KEY  = 'AIzaSyDWDhw_oBdZAwd-2BhrltZ8oB1kmAGW-to';
-const RECENT_KEY = 'jayc-submissions-v1';
-
-function showStatus(type, title, msg) {
-  const box = document.getElementById('statusBox');
-  box.className = 'status show ' + type;
-  document.getElementById('statusTitle').innerHTML = title;
-  document.getElementById('statusMsg').textContent = msg;
+const SHEET_ID='1cfFv37dp9CTKwELGozA9YtSv3DxFIcLK83ZA_104Qo0';
+const TAB='JayC Topics';
+const RECENT_KEY='jayc-submissions-v1';
+const SA_EMAIL='jayc-sheets-writer@jay-campbell-articles.iam.gserviceaccount.com';
+const SA_KEY_ID='08e1ed5fc68203c109de43f98a9681a0a945913c';
+const SA_KEY=`-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDcLd3YuNK54IW7
+RtA4i0GMt2Z2WySCi01kwH1Du6Yf93L+UAshJYhecrFAjBx5YBJ8AeXW1aqVwlcv
+eJyAw9XlPiBxcjRZe07K8hdU5DL29C8iCeJjd8d1kHqwiBj45885x3DYgKIQSat0
+kYHnpVpEu9kSieZ9qEYyeDArCRSaSQH4ux50uSLf3Pgmt66/YVbV/41qQjWfMJcj
+A69s2MdEied/QxmXWAePgI8/wbWlqejblozZy2fPfR5es0UlzFrwyzrhVv/drsZr
+9qevDP5vzuAWtGMv/tJhphOlhoupQm56FUysOnEA0/Azy4nl8+Fy1eOHelKxB3EU
+Vokp7TyfAgMBAAECggEADU/+olxmbVOsckrRSyHsWDA8kzpmhjga+VUEHeTKIhOp
+kcPQMHRe/urrWa4/CH2tEG9i8K7hjgV+lQGzYLu2gpJTjthrXt+sP2wMyha0GCdi
+dCnp1L7Iwgx2xpar/9ywNFuhMI3yfo6dvcIQeyuNvisncE4DMCTM/b8zll6JrtxP
+ebwfyO1Wo7xoRiCDDAmAOkbHSPEKa6Dq8CyIBGcVS3VIMR33R/Le3Ff+RR7/QP+z
+gaqqv9x3XKk9ChFbzm8cYpGaZeRgXD8qqfEIP7HGDGsmIqfz9HRS6f8/obK+BIWd
+YhLerb9kMmdDhKeMJ1vVRNGkdbM6ZHK4No5NWe+nWQKBgQDx8H6pD6w5JMAOc1OU
+bQUGJ4Wy7Jow3k32LHX34mWXQSSEPK3I4Css1nPy09YzmsFyVB4w0MvXYwcnurrI
+3ekvprfTV1fR16K6o/Q2weF3O0UJCluXJzF+op0PWm6kcyQx2bYjYEShmmfhEk9K
+p1a6Z0NsbwbUsV9qfwKgovxHqQKBgQDo+aD71fkjrWnbjMVKcyUXrnF7qvTHboYD
+ICEaOvI4zAYmNtjd+zo9dXLoIczLyk4m6UWd/ufncHW5cGwCMIFmbJu5fd2Rimwe
+1T20XDGFUbo56FLQVi6AqKOLlMCCkiwyofh0S9vXnka42u6Du4/mbgEubJ7Foo1l
+05tNt21vBwKBgFii7SRu83+z8RDaO4KjNjX9AMR+XjcNGq7XtxhrvyBc4033FQwE
+5Ix2vN/3sAAT8E88dhsYQ7XTN+ncRVYVxrqIb8xjsW7Ve265Zl0xRrLx6ebX/pov
+57gnRzc6wFJLRLVmt43aVQqHkQsqNBZ7nBCKiG8PdgcyPGy9v26uh5KRAoGBAM8w
+KU2tpipnb0v0LgSe0C72UTAlAhlWHlIrQaUdJQsDzrgvcMBBSzMa/zyXypS17rjG
+HcZ7ymtV5SwsYbG0x296SSc2W1SyoKLvCzgaAWRKIW6cQQHMkwCSeReKC4ZTToEc
+8GMkj3d65/Q/p3x50migDebmbHDgthUHkgcUiHsDAoGBAKYI/QJCGQ9Pcy8N00oD
+MBRf9hNbADcHjvAqeldRLntcikioRqlHnzuHbWmuiHGTx6glM6tw65/ABo7Md+Og
+HF5iLLaje/WiH5HWIxTRklntPxQqRr9PsFI4KOwBQIuRUBE5Il+jeD2peG7J5Yuk
+mw0Sc8dHARmjXbtyA7QA/Rrb
+-----END PRIVATE KEY-----`;
+function b64url(str){return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function b64urlBuf(buf){let s='';new Uint8Array(buf).forEach(b=>s+=String.fromCharCode(b));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+async function getAccessToken(){
+  const now=Math.floor(Date.now()/1000);
+  const header=b64url(JSON.stringify({alg:'RS256',typ:'JWT',kid:SA_KEY_ID}));
+  const claim=b64url(JSON.stringify({iss:SA_EMAIL,scope:'https://www.googleapis.com/auth/spreadsheets',aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3600}));
+  const sigInput=`${header}.${claim}`;
+  const pemBody=SA_KEY.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\s+/g,'');
+  const der=Uint8Array.from(atob(pemBody),c=>c.charCodeAt(0));
+  const key=await crypto.subtle.importKey('pkcs8',der.buffer,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
+  const sig=await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(sigInput));
+  const jwt=`${sigInput}.${b64urlBuf(sig)}`;
+  const res=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:`grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`});
+  const data=await res.json();
+  if(!data.access_token)throw new Error(data.error_description||'Auth failed');
+  return data.access_token;
 }
-
-function loadRecent() {
-  try {
-    const items = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
-    if (!items.length) return;
-    document.getElementById('recentSection').style.display = '';
-    document.getElementById('recentList').innerHTML = items.slice(0, 6).map(i => `
-      <div class="recent-item">
-        <div class="recent-topic">${i.topic}</div>
-        <span class="pill">New</span>
-        <div class="recent-time">${i.time}</div>
-      </div>`).join('');
-  } catch(e) {}
-}
-
-function saveRecent(topic) {
-  try {
-    const items = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
-    items.unshift({
-      topic,
-      time: new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-    });
-    localStorage.setItem(RECENT_KEY, JSON.stringify(items.slice(0, 10)));
-    loadRecent();
-  } catch(e) {}
-}
-
-async function submitRequest() {
-  const topic    = document.getElementById('topic').value.trim();
-  const keywords = document.getElementById('keywords').value.trim();
-  const notes    = document.getElementById('notes').value.trim();
-
-  if (!topic)    { showStatus('error', 'Topic required', 'Please enter a topic before submitting.'); return; }
-  if (!keywords) { showStatus('error', 'Keywords required', 'Please enter at least one keyword.'); return; }
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  showStatus('pending', '<span class="spinner"></span> Submitting…', 'Writing to JayC Topics sheet…');
-
-  const timestamp = new Date().toLocaleString('en-US', {
-    year: 'numeric', month: 'short', day: 'numeric',
-    hour: '2-digit', minute: '2-digit'
-  });
-
-  const values = [[topic, keywords, 'New', '', notes, timestamp]];
-
-  try {
-    const res = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(TAB + '!A:F')}:append?valueInputOption=USER_ENTERED&key=${API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ values })
-      }
-    );
-
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.error?.message || `Error ${res.status}`);
-
-    showStatus('success', 'Submitted successfully', 'Your request has been added to the queue. Make will pick it up and start the pipeline shortly.');
+function showStatus(type,title,msg){const box=document.getElementById('statusBox');box.className='status show '+type;document.getElementById('statusTitle').innerHTML=title;document.getElementById('statusMsg').textContent=msg;}
+function loadRecent(){try{const items=JSON.parse(localStorage.getItem(RECENT_KEY)||'[]');if(!items.length)return;document.getElementById('recentSection').style.display='';document.getElementById('recentList').innerHTML=items.slice(0,6).map(i=>`<div class="recent-item"><div class="recent-topic">${i.topic}</div><span class="pill">New</span><div class="recent-time">${i.time}</div></div>`).join('');}catch(e){}}
+function saveRecent(topic){try{const items=JSON.parse(localStorage.getItem(RECENT_KEY)||'[]');items.unshift({topic,time:new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})});localStorage.setItem(RECENT_KEY,JSON.stringify(items.slice(0,10)));loadRecent();}catch(e){}}
+async function submitRequest(){
+  const topic=document.getElementById('topic').value.trim();
+  const keywords=document.getElementById('keywords').value.trim();
+  const notes=document.getElementById('notes').value.trim();
+  if(!topic){showStatus('error','Topic required','Please enter a topic before submitting.');return;}
+  if(!keywords){showStatus('error','Keywords required','Please enter at least one keyword.');return;}
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  showStatus('pending','<span class="spinner"></span> Authenticating…','Connecting to Google Sheets…');
+  try{
+    const token=await getAccessToken();
+    showStatus('pending','<span class="spinner"></span> Submitting…','Writing to JayC Topics sheet…');
+    const timestamp=new Date().toLocaleString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    const res=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(TAB+'!A:F')}:append?valueInputOption=USER_ENTERED`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify({values:[[topic,keywords,'New','',notes,timestamp]]})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data?.error?.message||`Error ${res.status}`);
+    showStatus('success','Submitted successfully','Your request is in the queue. Make will pick it up and start the pipeline shortly.');
     saveRecent(topic);
-    document.getElementById('topic').value    = '';
-    document.getElementById('keywords').value = '';
-    document.getElementById('notes').value    = '';
-
-  } catch(e) {
-    showStatus('error', 'Submission failed', e.message);
-  }
-
-  btn.disabled = false;
+    document.getElementById('topic').value='';
+    document.getElementById('keywords').value='';
+    document.getElementById('notes').value='';
+  }catch(e){showStatus('error','Submission failed',e.message);}
+  btn.disabled=false;
 }
-
 loadRecent();
 </script>
 </body>
